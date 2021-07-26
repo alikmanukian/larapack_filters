@@ -29,8 +29,15 @@ class PatternFilter extends FilterAbstract
     return $query;
   }
 
-  public static function getJsonColumnName(string $column, string $key): string
+  public static function getJsonColumnName(string $column, string $key, $isMySql = null): string
   {
+    if ($isMySql === null) {
+      $isMySql = config('database.default') === 'mysql';
+    }
+
+    if ($isMySql) {
+      return "JSON_EXTRACT({$column}, \"$.{$key}\")";
+    }
     return "{$column}->>'{$key}'";
   }
 
@@ -40,6 +47,6 @@ class PatternFilter extends FilterAbstract
       return $query->orWhereRaw("LOWER({$column}) like ?", ["%".mb_strtolower($needle)."%"]);
     }
 
-    return $query->orWhereRaw("{$column} ilike ?", ["%".mb_strtolower($needle)."%"]);
+    return $query->orWhereRaw("{$column}::text ilike ?", ["%".mb_strtolower($needle)."%"]);
   }
 }
