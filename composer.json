@@ -1,5 +1,5 @@
 {
-    "name": "adscomltd/larapack_filters",
+    "name": "coderam/larapack_filters",
     "description": "Add filtering functionality for Eloquent models",
     "license": "MIT",
     "authors": [
@@ -12,7 +12,7 @@
     "homepage": "https://github.com/adscomltd/larapack_filters",
     "keywords": ["Laravel", "LarapackFilters"],
     "require": {
-        "illuminate/support": "~7|~8"
+        "illuminate/support": "~7|~8|~9|~10"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
